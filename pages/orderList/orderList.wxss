@@ -1,0 +1,20 @@
+/* pages/orderList/orderList.wxss */
+page { background-color: #f4f4f4; }
+.container { padding: 20rpx; }
+.order-card { background-color: #fff; border-radius: 16rpx; margin-bottom: 20rpx; padding: 20rpx; }
+.order-header { display: flex; justify-content: space-between; align-items: center; font-size: 26rpx; color: #666; padding-bottom: 15rpx; border-bottom: 1rpx solid #f0f0f0; margin-bottom: 15rpx; }
+.order-status { font-weight: bold; }
+.order-status.pendingPayment { color: #ff9900; } /* 示例状态颜色 */
+.product-item { display: flex; align-items: center; margin-bottom: 15rpx; }
+.product-cover { width: 100rpx; height: 120rpx; border-radius: 8rpx; margin-right: 20rpx; background-color: #eee; }
+.product-info { flex: 1; }
+.product-title { font-size: 28rpx; color: #333; margin-bottom: 5rpx; }
+.product-specs { font-size: 24rpx; color: #999; }
+.product-price { font-size: 28rpx; color: #333; }
+.order-summary { text-align: right; font-size: 26rpx; color: #555; padding: 15rpx 0; border-top: 1rpx solid #f0f0f0; margin-top: 10rpx; }
+.total-amount { font-size: 30rpx; color: #ff5000; font-weight: bold; }
+.order-actions { text-align: right; margin-top: 15rpx; }
+.order-actions button { margin-left: 15rpx; background-color: #fff; border: 1rpx solid #ccc; color: #555; }
+.order-actions button[type="default"] { /* */ }
+.empty-orders { text-align: center; color: #999; padding-top: 150rpx; }
+.empty-icon { width: 150rpx; height: 150rpx; margin-bottom: 20rpx; }

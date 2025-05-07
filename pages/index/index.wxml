@@ -1,0 +1,56 @@
+<view class="container">
+  <!-- 1. 搜索框区域 -->
+  <view class="search-section-wrapper"> <view class="search-section">
+      <input class="search-input" placeholder="请输入课程编号/课程名称/书籍名称" placeholder-class="input-placeholder" />
+      <view class="search-button">
+        <image class="search-icon" src="/images/search_icon.png" mode="aspectFit"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 2. 畅销书籍区域 -->
+  <view class="section best-sellers-section">
+    <view class="section-title">畅销书籍</view>
+    <scroll-view class="scroll-view-horizontal" scroll-x="true">
+      <!-- 修改这里：添加 bindtap 和 data-id -->
+      <view class="scroll-item-wrapper"
+            wx:for="{{bestsellers}}"
+            wx:key="id"
+            bindtap="navigateToBookDetail"
+            data-id="{{item.id}}"
+            data-type="bestseller">
+        <view class="book-card-horizontal">
+          <image class="book-cover-horizontal" src="{{item.coverUrl}}" mode="aspectFill"></image>
+          <view class="book-title-horizontal">{{item.title}}</view>
+          <view class="book-code-horizontal">{{item.courseCode}}</view>
+          <view class="book-price-horizontal">¥{{item.price}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 3. 最近新发布区域 -->
+  <view class="section recent-releases-section">
+    <view class="section-title">最近新发布</view>
+    <view class="release-list">
+      <!-- 修改这里：添加 bindtap 和 data-id -->
+      <view class="release-item"
+            wx:for="{{recentReleases}}"
+            wx:key="id"
+            bindtap="navigateToBookDetail"
+            data-id="{{item.id}}"
+            data-type="recentRelease">
+        <image class="release-cover" src="{{item.coverUrl}}" mode="aspectFill"></image>
+        <view class="release-info">
+          <view class="release-title">{{item.title}}</view>
+          <view class="release-code">{{item.courseCode}}</view>
+          <view class="release-price-line">
+            <text class="original-price">¥{{item.originalPrice}}</text>
+            <text class="current-price">¥{{item.price}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

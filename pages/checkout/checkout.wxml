@@ -1,0 +1,36 @@
+<!--pages/checkout/checkout.wxml-->
+<view class="container">
+  <!-- 商品信息区域 -->
+  <view class="section product-info-section">
+    <view class="section-title">商品信息</view>
+    <view class="order-item" wx:for="{{orderItems}}" wx:key="id">
+      <image class="item-cover" src="{{item.coverUrl}}" mode="aspectFill"></image>
+      <view class="item-details">
+        <view class="item-title">{{item.title}}</view>
+        <view class="item-code">{{item.courseCode}}</view>
+        <!-- <view class="item-quantity">x {{item.quantity}}</view> -->
+      </view>
+      <view class="item-price">¥{{item.price.toFixed(2)}}</view>
+    </view>
+  </view>
+
+  <!-- 配送方式、优惠券等其他信息可以加在这里 -->
+  <!--
+  <view class="section delivery-section">
+    <view class="section-title">配送方式</view>
+    <view class="option-row">
+      <text>快递 包邮</text>
+      <text class="arrow">></text>
+    </view>
+  </view>
+  -->
+
+  <!-- 底部结算栏 -->
+  <view class="bottom-checkout-bar">
+    <view class="total-amount-display">
+      <text>价格：</text>
+      <text class="amount-value">¥{{totalOrderPrice.toFixed(2)}}</text>
+    </view>
+    <button class="pay-button" bindtap="handlePayment">支付</button>
+  </view>
+</view>

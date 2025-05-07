@@ -1,0 +1,64 @@
+<!--pages/publish/publish.wxml-->
+<view class="container">
+  <form bindsubmit="submitForm">
+    <!-- 添加照片区域 -->
+    <view class="section photo-section">
+      <view class="section-title">书籍照片 (最多9张，首张为封面)</view>
+      <view class="image-uploader">
+        <view class="image-preview-list">
+          <view class="image-item" wx:for="{{imageUrls}}" wx:key="*this" bindtap="previewImage" data-src="{{item}}">
+            <image src="{{item}}" mode="aspectFill"></image>
+            <view class="delete-icon" catchtap="deleteImage" data-index="{{index}}">×</view>
+          </view>
+        </view>
+        <view class="upload-button" bindtap="chooseImage" wx:if="{{imageUrls.length < 9}}">
+          <image src="/images/camera_icon.png" class="upload-icon"></image>
+          <text>添加照片</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 添加描述区域 -->
+    <view class="section description-section">
+      <view class="section-title">书籍描述</view>
+      <textarea class="description-input"
+                name="description"
+                value="{{formData.description}}"
+                placeholder="请输入书籍的新旧程度、有无笔记、出售原因等..."
+                maxlength="500"
+                auto-height
+                bindinput="handleInputChange"
+                data-field="description"></textarea>
+      <view class="char-count">{{formData.description.length || 0}}/500</view>
+    </view>
+
+    <!-- 信息输入行 -->
+    <view class="section info-input-section">
+      <view class="input-row">
+        <view class="label">价格</view>
+        <input class="input-field" name="price" type="digit" value="{{formData.price}}" placeholder="点击输入出售价格" bindinput="handleInputChange" data-field="price"/>
+      </view>
+      <view class="input-row">
+        <view class="label">课程代码</view>
+        <input class="input-field" name="courseCode" type="text" value="{{formData.courseCode}}" placeholder="点击输入课程代码 (选填)" bindinput="handleInputChange" data-field="courseCode"/>
+      </view>
+      <view class="input-row">
+        <view class="label">书名</view>
+        <input class="input-field" name="title" type="text" value="{{formData.title}}" placeholder="点击输入书名" bindinput="handleInputChange" data-field="title"/>
+      </view>
+      <view class="input-row">
+        <view class="label">作者</view>
+        <input class="input-field" name="author" type="text" value="{{formData.author}}" placeholder="点击输入作者 (选填)" bindinput="handleInputChange" data-field="author"/>
+      </view>
+      <!-- 可以根据需要添加更多字段，如 ISBN, 出版社, 新旧程度选择等 -->
+    </view>
+
+    <!-- 提交按钮 -->
+    <view class="submit-button-container">
+      <button class="submit-button" form-type="submit" type="primary" disabled="{{submitting}}">
+        {{bookId ? '确认修改' : '确认发布'}}
+      </button>
+      <button class="delete-button" wx:if="{{bookId}}" bindtap="deleteBook" type="warn" disabled="{{submitting}}">删除此书</button>
+    </view>
+  </form>
+</view>

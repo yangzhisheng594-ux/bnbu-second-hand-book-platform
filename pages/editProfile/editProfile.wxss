@@ -1,0 +1,9 @@
+/* pages/editProfile/editProfile.wxss */
+.container { padding: 30rpx; }
+.form-item { display: flex; align-items: center; padding: 30rpx 0; border-bottom: 1rpx solid #f0f0f0; }
+.label { width: 160rpx; font-size: 30rpx; color: #333; }
+.avatar-wrapper { background: none; border: none; padding: 0; margin: 0; line-height: 1; }
+.avatar-wrapper::after { border: none; }
+.avatar-preview { width: 100rpx; height: 100rpx; border-radius: 50%; background-color: #f0f0f0; }
+.input-field { flex: 1; font-size: 30rpx; text-align: right; }
+.save-btn { margin-top: 60rpx; background-color: #1AAD19; }

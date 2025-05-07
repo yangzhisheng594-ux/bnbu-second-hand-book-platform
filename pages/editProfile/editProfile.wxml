@@ -1,0 +1,14 @@
+<view class="container">
+  <view class="form-item">
+    <text class="label">头像</text>
+    <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+      <image class="avatar-preview" src="{{avatarUrl || '/images/default_avatar.png'}}"></image>
+    </button>
+  </view>
+  <view class="form-item">
+    <text class="label">昵称</text>
+    <input class="input-field" type="nickname" placeholder="请输入昵称" value="{{nickName}}" bindinput="onNicknameInput"/>
+  </view>
+  <!-- 其他如性别、地区等 -->
+  <button class="save-btn" type="primary" bindtap="saveProfile">保存</button>
+</view>

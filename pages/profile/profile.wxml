@@ -1,0 +1,67 @@
+<!--pages/profile/profile.wxml-->
+<view class="container">
+  <!-- 用户信息区域 -->
+  <view class="profile-header" bindtap="handleLoginOrViewProfile">
+    <image class="avatar" src="{{userInfo.avatarUrl || '/images/default_avatar.png'}}" mode="aspectFill"></image>
+    <view class="user-info">
+      <text class="username">{{userInfo.nickName || '请登录/授权'}}</text>
+      <!-- 可以添加其他信息，如用户ID等 -->
+    </view>
+    <button class="edit-profile-btn" size="mini" catchtap="navigateToEditProfile">编辑</button>
+  </view>
+
+  <!-- 我的订单区域 -->
+  <view class="order-section section-card">
+    <view class="section-header" bindtap="navigateToOrderList" data-status="all">
+      <text class="section-title">我的订单</text>
+      <view class="view-all-orders">
+        <text>查看全部订单</text>
+        <image class="arrow-right" src="/images/arrow_right_gray.png" mode="aspectFit"></image>
+      </view>
+    </view>
+    <view class="order-status-tabs">
+      <view class="tab-item" bindtap="navigateToOrderList" data-status="pendingPayment">
+        <image class="tab-icon" src="/images/order_pending_payment.png"></image>
+        <text>待付款</text>
+        <text class="badge" wx:if="{{orderCounts.pendingPayment > 0}}">{{orderCounts.pendingPayment}}</text>
+      </view>
+      <view class="tab-item" bindtap="navigateToOrderList" data-status="pendingShipment">
+        <image class="tab-icon" src="/images/order_pending_shipment.png"></image>
+        <text>待发货</text>
+        <text class="badge" wx:if="{{orderCounts.pendingShipment > 0}}">{{orderCounts.pendingShipment}}</text>
+      </view>
+      <view class="tab-item" bindtap="navigateToOrderList" data-status="pendingReceipt">
+        <image class="tab-icon" src="/images/order_pending_receipt.png"></image>
+        <text>待收货</text>
+        <text class="badge" wx:if="{{orderCounts.pendingReceipt > 0}}">{{orderCounts.pendingReceipt}}</text>
+      </view>
+      <view class="tab-item" bindtap="navigateToOrderList" data-status="afterSales">
+        <image class="tab-icon" src="/images/order_after_sales.png"></image>
+        <text>退款/售后</text>
+        <!-- <text class="badge" wx:if="{{orderCounts.afterSales > 0}}">{{orderCounts.afterSales}}</text> -->
+      </view>
+    </view>
+  </view>
+
+  <!-- 其他功能入口，例如：我的收藏、地址管理、客服等 -->
+  <!--
+  <view class="other-options section-card">
+    <view class="option-item">
+      <image class="option-icon" src="/images/icon_collection.png"></image>
+      <text>我的收藏</text>
+      <image class="arrow-right" src="/images/arrow_right_gray.png" mode="aspectFit"></image>
+    </view>
+    <view class="option-item">
+      <image class="option-icon" src="/images/icon_address.png"></image>
+      <text>地址管理</text>
+      <image class="arrow-right" src="/images/arrow_right_gray.png" mode="aspectFit"></image>
+    </view>
+  </view>
+  -->
+
+  <button wx:if="{{!userInfo.nickName}}" class="login-button" type="primary" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">
+    微信用户快捷登录
+  </button>
+  <button wx:if="{{userInfo.nickName}}" class="logout-button" bindtap="logout">退出登录</button>
+
+</view>

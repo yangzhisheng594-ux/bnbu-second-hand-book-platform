@@ -1,0 +1,35 @@
+<view class="container">
+  <!-- 如果需要顶部tab切换不同状态 -->
+  <!-- <view class="tabs"> <view class="tab {{currentStatus === 'all' ? 'active' : ''}}" bindtap="switchTab" data-status="all">全部</view> ... </view> -->
+
+  <view class="order-list" wx:if="{{orders.length > 0}}">
+    <view class="order-card" wx:for="{{orders}}" wx:key="orderId">
+      <view class="order-header">
+        <text class="order-id">订单号: {{item.orderId}}</text>
+        <text class="order-status {{item.statusClass}}">{{item.statusText}}</text>
+      </view>
+      <view class="product-item" wx:for="{{item.products}}" wx:for-item="product" wx:key="productId">
+        <image class="product-cover" src="{{product.coverUrl}}" mode="aspectFill"></image>
+        <view class="product-info">
+          <view class="product-title">{{product.title}}</view>
+          <view class="product-specs">数量: {{product.quantity}}</view>
+        </view>
+        <view class="product-price">¥{{product.price.toFixed(2)}}</view>
+      </view>
+      <view class="order-summary">
+        <text>共{{item.totalQuantity}}件商品 合计: </text>
+        <text class="total-amount">¥{{item.totalAmount.toFixed(2)}}</text>
+      </view>
+      <view class="order-actions">
+        <!-- 根据订单状态显示不同按钮，如：去付款、确认收货、查看物流、评价、删除订单等 -->
+        <button size="mini" wx:if="{{item.status === 'pendingPayment'}}">去付款</button>
+        <button size="mini" wx:if="{{item.status === 'pendingReceipt'}}">确认收货</button>
+        <button size="mini" type="default">查看详情</button>
+      </view>
+    </view>
+  </view>
+  <view class="empty-orders" wx:else>
+    <image class="empty-icon" src="/images/empty_order_icon.png"></image>
+    <text>暂无相关订单</text>
+  </view>
+</view>

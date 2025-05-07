@@ -1,0 +1,204 @@
+/* pages/index/index.wxss */
+page {
+  background-color: #f4f4f4; /* 页面背景色 */
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.container {
+  padding-bottom: 20rpx;
+}
+
+/* 1. 搜索框区域 */
+.search-section-wrapper { /* 新增：搜索框的外部包裹，用于贴顶和背景 */
+  background-color: #fff; /* 白色背景，使其与导航栏融为一体 */
+  padding: 20rpx; /* 上下左右内边距 */
+  /* 如果希望搜索框内容区域有圆角，则在这里加 border-radius */
+  /* border-bottom-left-radius: 20rpx; */
+  /* border-bottom-right-radius: 20rpx; */
+  margin-bottom: 20rpx; /* 与下方内容的间距 */
+}
+
+.search-section { /* 修改：作为 flex 容器 */
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0; /* 输入框和按钮的共同浅灰色背景 */
+  border-radius: 40rpx; /* 整体圆角，参考图2 */
+  padding: 5rpx; /* 微调内边距，让输入框和按钮看起来在背景内 */
+  height: 80rpx; /* 加大搜索框整体高度 */
+}
+
+.search-input {
+  flex: 1; /* 占据大部分空间 */
+  height: 100%; /* 高度撑满父容器 .search-section 的内高 */
+  padding: 0 30rpx; /* 输入框左右内边距 */
+  font-size: 30rpx; /* 加大字体 */
+  background-color: transparent; /* 输入框背景透明，显示父容器的背景色 */
+  border: none; /* 移除默认边框 */
+  /* 如果需要输入框本身也有圆角（比如左侧圆角） */
+  /* border-top-left-radius: 35rpx; */
+  /* border-bottom-left-radius: 35rpx; */
+}
+
+.input-placeholder {
+  color: #999;
+  font-size: 28rpx;
+}
+
+.search-button { /* 新增：搜索按钮样式 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80rpx; /* 按钮宽度 */
+  height: 100%; /* 高度撑满 */
+  /* 如果需要按钮有圆角（比如右侧圆角） */
+  /* background-color: #f0f0f0; */ /* 如果和输入框背景色一致 */
+  /* border-top-right-radius: 35rpx; */
+  /* border-bottom-right-radius: 35rpx; */
+}
+
+.search-icon {
+  width: 44rpx; /* 加大图标 */
+  height: 44rpx;
+}
+
+/* 2. 通用区块样式 */
+.section {
+  background-color: #fff;
+  margin: 0 20rpx 20rpx 20rpx;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  padding-left: 10rpx;
+  border-left: 6rpx solid #d81e06;
+}
+
+/* 3. 畅销书籍区域 */
+.best-sellers-section {
+}
+
+.scroll-view-horizontal {
+  white-space: nowrap;
+}
+
+.scroll-item-wrapper {
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.scroll-item-wrapper:last-child {
+  margin-right: 0;
+}
+
+.book-card-horizontal {
+  width: 220rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 10rpx;
+  padding: 15rpx;
+  box-sizing: border-box;
+}
+
+.book-cover-horizontal {
+  width: 180rpx;
+  height: 240rpx;
+  border-radius: 8rpx;
+  background-color: #e0e0e0;
+  margin-bottom: 10rpx;
+}
+
+.book-title-horizontal {
+  font-size: 26rpx;
+  color: #333;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  margin-bottom: 6rpx;
+}
+
+.book-code-horizontal {
+  font-size: 22rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+  text-align: center;
+}
+
+.book-price-horizontal {
+  font-size: 28rpx;
+  color: #d81e06;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 4. 最近新发布区域  */
+.release-list { }
+
+.release-item {
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.release-item:last-child {
+  border-bottom: none;
+}
+
+.release-cover {
+  width: 180rpx;
+  height: 240rpx;
+  border-radius: 8rpx;
+  background-color: #e0e0e0;
+  margin-right: 20rpx;
+}
+
+.release-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.release-title {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 10rpx;
+}
+
+.release-code {
+  font-size: 24rpx;
+  color: #888;
+  margin-bottom: 10rpx;
+}
+
+.release-price-line {
+  display: flex;
+  align-items: baseline;
+}
+
+.original-price {
+  font-size: 24rpx;
+  color: #999;
+  text-decoration: line-through;
+  margin-right: 15rpx;
+}
+
+.current-price {
+  font-size: 32rpx;
+  color: #d81e06;
+  font-weight: bold;
+}

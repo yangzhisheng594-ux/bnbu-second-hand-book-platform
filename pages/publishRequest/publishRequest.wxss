@@ -1,0 +1,90 @@
+/* pages/publishRequest/publishRequest.wxss */
+page {
+  background-color: #f4f4f4;
+}
+.container {
+  padding: 20rpx;
+  padding-bottom: 180rpx;
+}
+
+.section { /* 复用 publish.wxss 的 .section */
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  padding: 0 20rpx; /* 上下 padding 由 input-row 控制 */
+}
+/* 如果有 section-title，也复用 */
+
+.info-input-section {
+  padding-top: 0; /* 调整，因为没有独立的标题 */
+  padding-bottom: 0;
+}
+
+.input-row { /* 复用 publish.wxss 的 .input-row */
+  display: flex;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+  font-size: 30rpx;
+}
+.input-row:last-child {
+  border-bottom: none;
+}
+.description-row {
+  align-items: flex-start; /* 让label和textarea顶部对齐 */
+}
+.label { /* 复用 publish.wxss 的 .label */
+  width: 180rpx;
+  color: #333;
+  margin-right: 20rpx;
+  line-height: 1.5; /* 保证多行输入时label垂直居中 */
+}
+.input-field { /* 复用 publish.wxss 的 .input-field */
+  flex: 1;
+  text-align: right;
+  color: #555;
+}
+.input-field::placeholder {
+  color: #bbb;
+  font-size: 28rpx;
+}
+.description-input { /* 新增或调整 */
+  flex: 1;
+  min-height: 100rpx;
+  padding: 10rpx 0; /* textarea自身可能需要微调 */
+  box-sizing: border-box;
+  font-size: 28rpx;
+  line-height: 1.5;
+  text-align: right; /* 保持和其他input一致 */
+}
+
+
+.submit-button-container { /* 复用 publish.wxss 的 .submit-button-container */
+  margin-top: 60rpx;
+}
+.submit-button, .delete-button { /* 复用 publish.wxss */
+  border-radius: 10rpx;
+  font-size: 32rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+.submit-button[type="primary"] {
+  background-color: #1AAD19;
+  color: white;
+}
+.submit-button[disabled] {
+  background-color: #9ade9a !important;
+  color: #e0ffe0 !important;
+}
+.delete-button {
+  margin-top: 20rpx;
+  background-color: #fdecea;
+  color: #e64340;
+}
+.delete-button[type="warn"] {
+  border: 1rpx solid #f8c7c6;
+}
+.delete-button[disabled] {
+  background-color: #ffe5e4 !important;
+  color: #f8c7c6 !important;
+}

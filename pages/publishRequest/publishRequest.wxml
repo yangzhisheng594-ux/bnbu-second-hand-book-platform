@@ -1,0 +1,42 @@
+<!--pages/publishRequest/publishRequest.wxml-->
+<view class="container">
+  <form bindsubmit="submitRequestForm">
+    <view class="section info-input-section">
+      <view class="input-row">
+        <view class="label">期望价格</view>
+        <input class="input-field" name="expectedPrice" type="digit" value="{{formData.expectedPrice}}" placeholder="点击输入期望价格" bindinput="handleInputChange" data-field="expectedPrice"/>
+      </view>
+      <view class="input-row">
+        <view class="label">课程代码</view>
+        <input class="input-field" name="courseCode" type="text" value="{{formData.courseCode}}" placeholder="点击输入课程代码 (选填)" bindinput="handleInputChange" data-field="courseCode"/>
+      </view>
+      <view class="input-row">
+        <view class="label">书名</view>
+        <input class="input-field" name="title" type="text" value="{{formData.title}}" placeholder="点击输入书名" bindinput="handleInputChange" data-field="title"/>
+      </view>
+      <view class="input-row">
+        <view class="label">作者</view>
+        <input class="input-field" name="author" type="text" value="{{formData.author}}" placeholder="点击输入作者 (选填)" bindinput="handleInputChange" data-field="author"/>
+      </view>
+      <!-- 可以根据需要添加更多描述性字段，如图书版本、新旧程度要求等 -->
+      <view class="input-row description-row">
+        <view class="label">补充说明</view>
+        <textarea class="description-input"
+                  name="description"
+                  value="{{formData.description}}"
+                  placeholder="对书籍版本、新旧程度、笔记等有无要求 (选填)"
+                  maxlength="200"
+                  auto-height
+                  bindinput="handleInputChange"
+                  data-field="description"></textarea>
+      </view>
+    </view>
+
+    <view class="submit-button-container">
+      <button class="submit-button" form-type="submit" type="primary" disabled="{{submitting}}">
+        {{requestId ? '确认修改' : '确认发布'}}
+      </button>
+      <button class="delete-button" wx:if="{{requestId}}" bindtap="deleteRequest" type="warn" disabled="{{submitting}}">删除此求购</button>
+    </view>
+  </form>
+</view>

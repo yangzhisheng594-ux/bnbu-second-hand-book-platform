@@ -1,0 +1,142 @@
+/* pages/request/request.wxss */
+/* 可以直接 @import "../sell/sell.wxss"; 如果大部分样式通用 */
+/* 或者复制 sell.wxss 的内容并按需修改 */
+
+page {
+  background-color: #f4f4f4;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+}
+
+.container {
+  padding-bottom: 140rpx; /* 为底部固定按钮留出空间 */
+}
+
+.section {
+  background-color: #fff;
+  margin: 20rpx;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  padding-left: 10rpx;
+  border-left: 6rpx solid #007AFF; /* 例如，求购用蓝色装饰线 */
+}
+
+.book-list { }
+
+.book-item {
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+  align-items: center;
+}
+.book-item:last-child {
+  border-bottom: none;
+}
+
+.book-cover {
+  width: 120rpx;
+  height: 160rpx;
+  border-radius: 8rpx;
+  background-color: #e0e0e0;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.book-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 160rpx;
+}
+
+.book-name {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 8rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.book-detail-line {
+  font-size: 24rpx;
+  color: #888;
+  margin-bottom: 8rpx;
+}
+.book-price { /* 通用价格样式，方便复用 */
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.seeking-price { /* 特定给求购价格的颜色 */
+  color: #007AFF; /* 求购价格用蓝色 */
+}
+
+.manage-button {
+  font-size: 24rpx;
+  padding: 0 20rpx;
+  line-height: 50rpx;
+  height: 50rpx;
+  border-radius: 25rpx;
+  margin-left: 20rpx;
+  flex-shrink: 0;
+  background-color: #f0f0f0;
+  color: #555;
+}
+.manage-button::after {
+  border: none;
+}
+
+.empty-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}
+.empty-icon {
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 20rpx;
+  opacity: 0.7;
+}
+
+.load-more, .no-more {
+  text-align: center;
+  color: #999;
+  font-size: 26rpx;
+  padding-top: 30rpx;
+}
+
+.publish-button-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f7f7f7;
+  padding: 20rpx 40rpx;
+  box-sizing: border-box;
+  border-top: 1rpx solid #e0e0e0;
+  z-index: 10;
+}
+
+.publish-button {
+  background-color: #1AAD19; /* 微信绿色 */
+  color: white;
+  font-size: 32rpx;
+  border-radius: 10rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+.publish-button::after {
+  border: none;
+}

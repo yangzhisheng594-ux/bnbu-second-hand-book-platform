@@ -1,0 +1,61 @@
+<!--pages/bookDetail/bookDetail.wxml-->
+<view class="container">
+  <!-- 顶部图片和基本信息区域 -->
+  <view class="book-main-info-section">
+    <!-- 图片区域 -->
+    <view class="image-container">
+      <swiper class="image-swiper" indicator-dots="true" autoplay="false" circular="true" wx:if="{{book.imageUrls && book.imageUrls.length > 0}}">
+        <block wx:for="{{book.imageUrls}}" wx:key="*this">
+          <swiper-item>
+            <image src="{{item}}" class="slide-image" mode="aspectFill"/>
+          </swiper-item>
+        </block>
+      </swiper>
+      <image src="{{book.coverUrl || '/images/placeholder_cover_rect.png'}}" class="slide-image placeholder-image" mode="aspectFill" wx:else/>
+      <view class="image-count" wx:if="{{book.imageUrls && book.imageUrls.length > 1}}">
+        <text>{{currentSwiper + 1}}</text>/{{book.imageUrls.length}}
+      </view>
+      <!-- 返回按钮在自定义导航栏时使用，这里使用页面自带的返回 -->
+    </view>
+
+    <!-- 价格、书名、作者、代码、分享区域 -->
+    <view class="meta-info">
+      <view class="price-line">
+        <text class="current-price">¥{{book.price || 'N/A'}}</text>
+        <text class="original-price" wx:if="{{book.originalPrice}}">¥{{book.originalPrice}}</text>
+      </view>
+      <view class="title-author">
+        {{book.title || '书籍标题加载中...'}}
+        <text wx:if="{{book.author}}" class="author-name"> / {{book.author}}</text>
+      </view>
+      <view class="code-share-line">
+        <text class="course-code">课程代码: {{book.courseCode || '未知'}}</text>
+        <button class="share-button" open-type="share">
+          <image src="/images/share_icon.png" class="share-icon" mode="aspectFit"></image>
+          分享
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 书籍详情内容区域 -->
+  <view class="book-content-section">
+    <view class="section-title-detail">书籍详情</view>
+    <view class="content-text">
+      {{book.description || '暂无详细介绍。'}}
+      <!-- 如果是富文本，可以使用 rich-text 组件 -->
+      <!-- <rich-text nodes="{{book.richDescription}}"></rich-text> -->
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-actions">
+    <view class="action-button add-to-cart-button" bindtap="addToCart">
+      <image src="/images/cart_add_icon.png" class="action-icon" mode="aspectFit"></image>
+      加入购物车
+    </view>
+    <view class="action-button buy-now-button" bindtap="buyNow">
+      立即购买
+    </view>
+  </view>
+</view>

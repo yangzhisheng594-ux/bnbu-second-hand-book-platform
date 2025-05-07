@@ -1,0 +1,62 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/sell/sell",
+    "pages/request/request",
+    "pages/cart/cart",
+    "pages/profile/profile",
+    "pages/bookDetail/bookDetail",
+    "pages/publish/publish",
+    "pages/publishRequest/publishRequest",
+    "pages/checkout/checkout",
+    "pages/editProfile/editProfile",
+    "pages/orderList/orderList"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "书城首页",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#d81e06",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "主页",
+        "iconPath": "images/tabbar/home_normal.png",
+        "selectedIconPath": "images/tabbar/home_selected.png"
+      },
+      {
+        "pagePath": "pages/sell/sell",
+        "text": "卖书",
+        "iconPath": "images/tabbar/sell_normal.png",
+        "selectedIconPath": "images/tabbar/sell_selected.png"
+      },
+      {
+        "pagePath": "pages/request/request",
+        "text": "求购",
+        "iconPath": "images/tabbar/request_normal.png",
+        "selectedIconPath": "images/tabbar/request_selected.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "images/tabbar/cart_normal.png",
+        "selectedIconPath": "images/tabbar/cart_selected.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/tabbar/profile_normal.png",
+        "selectedIconPath": "images/tabbar/profile_selected.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

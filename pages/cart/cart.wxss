@@ -1,0 +1,89 @@
+/* pages/cart/cart.wxss */
+page { background-color: #f4f4f4; }
+.container { padding-bottom: 120rpx; /* 为底部栏留空间 */ }
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background-color: #fff;
+  font-size: 28rpx;
+  color: #666;
+  border-bottom: 1rpx solid #eee;
+}
+.manage-toggle-btn {
+  background-color: transparent;
+  color: #337 प्रयास; /* 主题色 */
+  border: none; padding: 0; margin: 0;
+  font-size: 28rpx; line-height: 1;
+}
+.manage-toggle-btn::after{ border: none; }
+
+.cart-list-scroll {
+  /* 如果内容不多，可以不设置固定高度，让其自然撑开 */
+  /* height: calc(100vh - 120rpx - 80rpx); */ /* 视情况调整，减去底部栏和头部栏高度 */
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 20rpx;
+  margin: 20rpx 20rpx 0 20rpx;
+  border-radius: 10rpx;
+}
+.select-checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 2rpx solid #ccc;
+  margin-right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.select-checkbox.selected {
+  background-color: #ff5000; /* 选中红色 */
+  border-color: #ff5000;
+}
+.item-cover {
+  width: 160rpx; height: 200rpx;
+  border-radius: 8rpx; background-color: #eee;
+  margin-right: 20rpx; flex-shrink: 0;
+}
+.item-info { flex: 1; display: flex; flex-direction: column; }
+.item-title { font-size: 28rpx; color: #333; margin-bottom: 8rpx; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; text-overflow: ellipsis; }
+.item-code { font-size: 24rpx; color: #999; margin-bottom: 10rpx; }
+.item-price { font-size: 30rpx; color: #ff5000; font-weight: bold; }
+/* 数量控制器样式 (如果添加) */
+/* .item-quantity-control { display: flex; align-items: center; margin-top: 10rpx; } */
+/* .item-quantity-control button { width: 50rpx; height: 50rpx; line-height: 50rpx; padding:0; margin:0 10rpx; background-color: #f0f0f0; border-radius: 50%; font-size: 30rpx;} */
+/* .item-quantity-control text { font-size: 28rpx; margin: 0 15rpx; } */
+
+
+.empty-cart { display: flex; flex-direction: column; align-items: center; padding-top: 150rpx; color: #999; }
+.empty-icon { width: 180rpx; height: 180rpx; margin-bottom: 30rpx; opacity: 0.7; }
+.go-shopping-btn { margin-top: 40rpx; background-color: #ff5000; color: white; border-radius: 40rpx; padding: 0 60rpx; font-size: 30rpx; }
+
+.bottom-bar {
+  position: fixed; bottom: 0; left: 0; width: 100%;
+  height: 100rpx; background-color: #fff;
+  border-top: 1rpx solid #eee; display: flex;
+  align-items: center; padding: 0 30rpx; box-sizing: border-box; z-index: 100;
+}
+.select-all-text { margin-left: 15rpx; font-size: 28rpx; color: #666; }
+.summary-action { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
+.total-price-label { font-size: 26rpx; color: #666; }
+.total-price-value { font-size: 32rpx; color: #ff5000; font-weight: bold; margin: 0 20rpx; }
+.selected-info-text { flex: 1; text-align: right; font-size: 28rpx; color: #666; margin-right: 20rpx; }
+.checkout-btn, .delete-btn {
+  background-color: #ff5000; color: white;
+  border-radius: 40rpx; padding: 0 40rpx;
+  height: 70rpx; line-height: 70rpx; font-size: 28rpx;
+  margin: 0;
+}
+.checkout-btn[disabled], .delete-btn[disabled] {
+  background-color: #fabfab; color: #fff7f3;
+}
