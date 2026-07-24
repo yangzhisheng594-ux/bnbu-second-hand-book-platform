@@ -1,100 +1,104 @@
-# BNBU 书循环
+# BNBU BookCycle | BNBU 书循环
 
-> 校园二手教材交易微信小程序 · 让好书继续流转，让知识再次生长
+> A WeChat Mini Program for course-aware campus textbook exchange — connecting students who need a book with students ready to pass one on.
 
-BNBU 书循环面向校园教材流转场景设计，以“课程找书—闲置转让—校内面交—确认收书”为核心路径，帮助同学高效处理闲置教材，也让每一本书被更充分地使用。
+**BNBU BookCycle** is a product-oriented campus marketplace prototype for second-hand textbooks. It models the complete textbook-circulation journey: finding a book by course, responding to a buy request, listing an unused copy, arranging an on-campus handoff, and confirming receipt.
 
-本仓库默认启用**本地演示模式**：不需要购买数据库或配置服务器，导入微信开发者工具后即可完整体验并用于答辩演示。
+The user interface and screenshots are intentionally in Chinese because the product is designed for a Chinese-language university context. The repository documentation is in English so that its product and engineering decisions are reviewable by a wider audience.
 
-## 项目预览
-
-<p align="center">
-  <img src="docs/screenshots/01-home.png" width="31%" alt="首页与课程智能匹配" />
-  <img src="docs/screenshots/02-sell.png" width="31%" alt="书籍出售与求购联动" />
-  <img src="docs/screenshots/03-request.png" width="31%" alt="我的求购" />
-</p>
-
-<p align="center">
-  <img src="docs/screenshots/04-cart.png" width="31%" alt="购物车" />
-  <img src="docs/screenshots/05-profile.png" width="31%" alt="个人中心与推荐" />
-  <img src="docs/screenshots/06-book-list.png" width="31%" alt="新书上架列表" />
-</p>
-
-## 核心亮点
-
-- **课程智能匹配**：按课程代码筛选当前流转教材，例如选择 `CS101` 即可匹配《图解算法》；课程、教材与求购信息建立清晰关联。
-- **求购联动**：在“同学正在找”中点击“我有此书”，可带着课程信息进入发布流程，突出双向撮合而非单纯商品陈列。
-- **校内面交闭环**：购买后不使用普通快递叙事，而是展示“约定面交—确认收书”的校园交易状态，契合二手教材的真实使用场景。
-- **双角色体验**：同一位同学既可买书、求购，也能出售闲置书；“书籍出售”页同时管理我的在售和同学需求。
-- **完整本地演示**：购物车、下单、状态流转、发布书籍、发布求购均可在无后端环境中演示。
-- **统一视觉语言**：以墨绿、米白、珊瑚橙为主色，配合手绘书本、树叶、面交等小插画，形成轻量友好的校园书籍循环主题。
-
-## 答辩演示路径
+## Product workflow
 
 ```text
-首页选择课程 CS203
-  → 查看匹配教材与同学求购
-  → 点击“我有此书”发布闲置书
-  → 进入书籍详情并加入购物车
-  → 提交订单，约定校内面交
-  → 买家确认收书，完成教材流转
+Choose a course
+  → discover matching textbooks and active buy requests
+  → respond with an available copy or create a listing
+  → add a book to the cart and place a demo order
+  → arrange an on-campus handoff
+  → confirm receipt and complete the circulation loop
 ```
 
-## 功能一览
+## Key capabilities
 
-| 模块 | 已实现能力 |
+- **Course-aware discovery** — textbook listings, course codes, and buy requests are connected rather than presented as an unstructured catalogue.
+- **Two-sided matching** — a student can browse, buy, sell, or publish a request; “I have this book” carries the course context into the listing flow.
+- **Campus-local transaction model** — the order lifecycle is built around arranging an in-person handoff and confirming receipt, rather than pretending to provide courier logistics.
+- **Runnable local demo** — cart, listing, request, order-state, and receipt flows can be demonstrated without purchasing a database or deploying a server.
+- **Optional production path** — cloud functions, database migrations, and server-side validation are included as an extension path beyond the local demo.
+- **Deliberate visual system** — ink green, warm off-white, and coral accents reinforce a friendly “books in circulation” product identity.
+
+## Interface preview
+
+<p align="center">
+  <img src="docs/screenshots/01-home.png" width="31%" alt="Home page and course-aware textbook matching / 首页与课程匹配" />
+  <img src="docs/screenshots/02-sell.png" width="31%" alt="Sell flow and buy-request matching / 出售与求购联动" />
+  <img src="docs/screenshots/03-request.png" width="31%" alt="My buy requests / 我的求购" />
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/04-cart.png" width="31%" alt="Cart and demo checkout / 购物车与模拟结算" />
+  <img src="docs/screenshots/05-profile.png" width="31%" alt="Profile and course recommendations / 个人中心与课程推荐" />
+  <img src="docs/screenshots/06-book-list.png" width="31%" alt="New textbook listings / 新书上架列表" />
+</p>
+
+## Technical design
+
+| Layer | Design choice |
 | --- | --- |
-| 首页 | 热门教材、新书上架、关键词搜索、课程智能匹配、校园流转指引 |
-| 书籍浏览 | 书名/作者/课程编号搜索、教材详情、价格、品相、课程标签 |
-| 购买与面交 | 加入购物车、模拟结算、约定面交、确认收书、订单状态展示 |
-| 出售与求购 | 发布/管理闲置书、发布/管理求购、求购联动、一键响应需求 |
-| 个人中心 | 订单状态、课程偏好推荐、个人资料入口、本地演示数据重置 |
+| Client | Native WeChat Mini Program pages, styles, and JavaScript interaction logic |
+| Demonstration mode | `utils/demoService.js` maintains mutable in-session data with `DEMO_MODE = true` |
+| Production extension | Cloud functions and MySQL migration scripts support a future persistent backend |
+| Transaction integrity | In real-backend mode, item status, ownership, and final price are revalidated server-side |
+| Local reproducibility | Demo data resets after recompilation, so each presentation starts from a known state |
 
-## 演示模式
+The checkout experience is a **course-project demonstration only**. It does not invoke real payment or make any charge.
 
-默认情况下，`utils/demoService.js` 中的 `DEMO_MODE` 为 `true`。小程序会使用一组可变更的本地演示数据来模拟云函数响应，因此即使不配置数据库，也能体验完整核心流程。
+## Run locally
+
+1. Clone the repository and import it into **WeChat DevTools**.
+2. Use the AppID in `project.config.json`, or replace it with your own test AppID.
+3. Click **Compile**. The default local demo requires no cloud environment or database.
 
 ```js
 // utils/demoService.js
 const DEMO_MODE = true
 ```
 
-- 演示数据只保存在当前小程序会话中；重新编译后会恢复初始状态，便于每次演示从相同场景开始。
-- 要接入真实后端时，将 `DEMO_MODE` 改为 `false`，并部署云函数、配置数据库环境变量即可。
+## Optional deployment path
 
-## 本地运行
+To connect a persistent backend:
 
-1. 使用微信开发者工具导入本项目目录。
-2. 使用 `project.config.json` 中的 AppID，或替换为自己的测试 AppID。
-3. 点击“编译”，即可在演示模式下运行，无需数据库。
+1. Deploy the functions in `cloudfunctions/` to a WeChat Cloud Development environment.
+2. Configure `DB_HOST`, `DB_USER`, `DB_PASS`, `DB_NAME`, and `DB_PORT` as cloud-function environment variables.
+3. Apply the MySQL initialization and incremental scripts in `database-migrations/`.
+4. Replace the demo checkout with a real payment workflow only after implementing order creation, callback verification, and idempotency.
 
-## 正式部署（可选）
-
-1. 在微信云开发环境中部署 `cloudfunctions/` 下的函数，并安装相应依赖。
-2. 在云函数环境变量中配置 `DB_HOST`、`DB_USER`、`DB_PASS`、`DB_NAME`、`DB_PORT`。
-3. 新建数据库时执行上级目录中的 MySQL 初始化脚本；已有数据库可依次执行 `database-migrations/` 下的增量脚本。
-4. 真实支付应接入微信支付下单、回调验签与幂等处理；当前项目的支付仅用于课程演示，不会发生真实扣款。
-
-## 项目结构
+## Repository layout
 
 ```text
-├── pages/                 # 小程序页面、样式与交互
-├── cloudfunctions/        # 云函数与真实后端校验逻辑
-├── database-migrations/   # 数据库增量脚本
-├── utils/demoService.js   # 无数据库本地演示数据服务
-├── images/                # 页面插画与视觉资源
-└── docs/screenshots/      # README 展示截图
+├── pages/                 # Mini Program views, styles, and interactions
+├── cloudfunctions/        # Optional server-side functions and validation
+├── database-migrations/   # Database initialization and incremental changes
+├── utils/demoService.js   # In-session local demonstration service
+├── images/                # Product visual assets
+└── docs/screenshots/      # README interface previews
 ```
 
-## 工程说明
+## Security and scope
 
-- 数据库连接使用云函数环境变量，不在源代码中保存真实数据库凭据。
-- 真实模式中，订单创建会重新校验商品状态、归属与成交价格，前端金额不作为可信来源。
-- 每本二手教材仅允许成交一次；购物车、发布、下架等操作均会校验用户归属。
-- `project.private.config.json` 为本机微信开发者工具偏好，已排除在 Git 提交之外。
+- Credentials are not stored in source code; backend values belong in cloud-function environment variables.
+- `project.private.config.json` and `.env*` files are excluded from version control.
+- The repository contains fictional, local-demo data only.
+- This is a portfolio and course-project prototype, not a deployed marketplace or payment service.
 
-## 后续可拓展方向
+## 中文说明
 
-- 接入校园认证与信用评价，降低陌生人交易成本。
-- 加入面交地点/时间预约与订阅消息提醒。
-- 引入收藏、举报、审核与教材版本比对，完善校园交易治理。
+**BNBU 书循环** 是一个面向校园二手教材流转场景设计的微信小程序。项目围绕“课程找书—闲置转让—校内面交—确认收书”构建完整体验：学生可以按课程编号匹配教材，也可以发布求购、响应同学需求、上架闲置书并完成校内面交流程。
+
+项目默认启用本地演示模式，不需要配置数据库或服务器即可在微信开发者工具中体验核心功能；同时保留云函数与数据库迁移方案，作为后续接入真实后端的工程基础。
+
+## Future directions
+
+- Campus identity verification and reputation signals.
+- Handoff time and location scheduling with subscription reminders.
+- Favourites, reporting, moderation, and textbook-edition matching.
+- A carefully designed payment and dispute workflow for a real deployment.
