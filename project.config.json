@@ -1,8 +1,18 @@
 {
   "compileType": "miniprogram",
-  "libVersion": "trial",
+  "libVersion": "3.8.3",
   "packOptions": {
-    "ignore": [],
+    "ignore": [
+      { "type": "file", "value": "images/用户.png" },
+      { "type": "file", "value": "images/深入浅出nodejs.jpg" },
+      { "type": "file", "value": "images/你不知道的JavaScript（上卷）精装版.jpg" },
+      { "type": "file", "value": "images/小程序开发实战.jpg" },
+      { "type": "file", "value": "images/操作系统概念.jpg" },
+      { "type": "file", "value": "images/现代操作系统.jpg" },
+      { "type": "file", "value": "images/深入浅出nodejs2.jpg" },
+      { "type": "file", "value": "images/云原生架构：原理与实践.jpg" },
+      { "type": "file", "value": "images/编译原理.jpg" }
+    ],
     "include": []
   },
   "setting": {
@@ -36,6 +46,8 @@
     "tabIndent": "auto",
     "tabSize": 2
   },
-  "appid": "wx88f0743e6e1e7643",
-  "simulatorPluginLibVersion": {}
+  "appid": "wxbeb1726fed964a58",
+  "simulatorPluginLibVersion": {},
+  "cloudfunctionRoot": "cloudfunctions/",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/"
 }

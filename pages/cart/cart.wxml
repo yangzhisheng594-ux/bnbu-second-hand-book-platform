@@ -1,63 +1,54 @@
-<!--pages/cart/cart.wxml-->
 <view class="container">
-  <!-- 顶部管理栏 -->
-  <view class="cart-header">
-    <text class="total-count">共 {{cartItems.length}} 件宝贝</text>
-    <button class="manage-toggle-btn" size="mini" bindtap="toggleManageMode">
-      {{isManaging ? '退出管理' : '管理'}}
-    </button>
+  <!-- 顶部栏 -->
+  <view class="header">
+    <text class="title">购物车</text>
+    <view class="header-right">
+      <view class="manage-container">
+        <text class="manage-btn" bindtap="toggleManageMode">{{isManageMode ? '完成' : '管理'}}</text>
+      </view>
+    </view>
   </view>
 
-  <!-- 购物车列表 -->
-  <scroll-view scroll-y class="cart-list-scroll" wx:if="{{cartItems.length > 0}}">
-    <view class="cart-item" wx:for="{{cartItems}}" wx:key="id">
-      <view class="select-checkbox {{item.selected ? 'selected' : ''}}" bindtap="toggleSelectItem" data-index="{{index}}">
-        <icon wx:if="{{item.selected}}" type="success_no_circle" size="18" color="#fff"></icon>
-      </view>
-      <image class="item-cover" src="{{item.coverUrl}}" mode="aspectFill"></image>
-      <view class="item-info">
-        <view class="item-title">{{item.title}}</view>
-        <view class="item-code">{{item.courseCode}}</view>
-        <view class="item-price">¥{{item.price.toFixed(2)}}</view>
-        <!-- 如果需要数量控制器 -->
-        <!--
-        <view class="item-quantity-control" wx:if="{{!isManaging}}">
-          <button size="mini" bindtap="decreaseQuantity" data-index="{{index}}">-</button>
-          <text>{{item.quantity}}</text>
-          <button size="mini" bindtap="increaseQuantity" data-index="{{index}}">+</button>
+  <!-- 中间内容区域 -->
+  <view class="content-section">
+    <view class="cart-caption" wx:if="{{books.length > 0}}">已为你保留 {{books.length}} 本好书</view>
+    <view wx:if="{{books.length > 0}}">
+      <view class="product-item" wx:for="{{books}}" wx:key="cartItemId" wx:for-item="book" wx:for-index="index"> <!-- 建议 key 使用 cartItemId 更唯一 -->
+        <checkbox class="product-checkbox" checked="{{book.selected}}" bindtap="toggleSelect" data-index="{{index}}"></checkbox>
+        <image class="product-cover" src="{{book.coverUrl || ''}}" mode="aspectFill"></image> <!-- 如果没有默认图，src 为空字符串 -->
+        <view class="product-info">
+          <view class="product-title">{{book.title}}</view>
+          <view class="product-spec">{{book.spec}}</view>
+          <!-- !!! 修改点：直接使用格式化好的 displayPrice !!! -->
+          <view class="product-price" wx:if="{{book.displayPrice !== undefined}}">¥{{book.displayPrice}}</view>
+          <view class="product-price" wx:else>¥0.00</view> <!-- 如果 displayPrice 也没有，显示0.00 -->
         </view>
-        -->
       </view>
     </view>
-  </scroll-view>
-
-  <view class="empty-cart" wx:else>
-    <image class="empty-icon" src="/images/empty_cart_icon.png"></image>
-    <text>购物车还是空的</text>
-    <button class="go-shopping-btn" bindtap="goShopping">去逛逛</button>
+    <view wx:else class="empty-cart">
+      <text>购物车还是空的哦，快去逛逛吧～</text>
+    </view>
   </view>
 
-  <!-- 底部操作栏 -->
-  <view class="bottom-bar">
-    <view class="select-all-checkbox {{isAllSelected ? 'selected' : ''}}" bindtap="toggleSelectAll">
-      <icon wx:if="{{isAllSelected}}" type="success_no_circle" size="18" color="#fff"></icon>
+  <!-- 底部栏 -->
+  <view class="footer">
+    <label class="checkbox-label">
+      <checkbox class="checkbox" checked="{{isAllSelected}}" bindtap="toggleSelectAll" disabled="{{books.length === 0}}"></checkbox>
+      <text>全选</text>
+    </label>
+    <view class="total" wx:if="{{!isManageMode}}">
+      <text>合计：</text>
+      <text class="price">¥{{totalPrice}}</text>
     </view>
-    <text class="select-all-text">全选</text>
-
-    <view class="summary-action">
-      <block wx:if="{{!isManaging}}">
-        <text class="total-price-label">合计：</text>
-        <text class="total-price-value">¥{{totalPrice.toFixed(2)}}</text>
-        <button class="checkout-btn" bindtap="checkout" disabled="{{selectedCount === 0}}">
-          结算({{selectedCount}})
-        </button>
-      </block>
-      <block wx:else>
-        <text class="selected-info-text">已选：{{selectedCount}} 件</text>
-        <button class="delete-btn" bindtap="deleteSelectedItems" disabled="{{selectedCount === 0}}">
-          删除
-        </button>
-      </block>
+    <view class="total-selected" wx:else> <!-- 使用之前建议的 .total-selected 类名 -->
+      <text>已选{{selectedCount}}件</text>
     </view>
+    <button
+      class="checkout-btn {{isManageMode ? 'delete-mode' : ''}}"
+      bindtap="{{isManageMode ? 'deleteSelected' : 'checkout'}}"
+      disabled="{{selectedCount === 0}}"
+    >
+      {{isManageMode ? '删除' : '结算'}}({{selectedCount}})
+    </button>
   </view>
 </view>

@@ -1,0 +1,10 @@
+{
+  "name": "updatecartitem",
+  "version": "1.0.0",
+  "description": "Updates or removes items from MySQL cart",
+  "main": "index.js",
+  "dependencies": {
+    "mysql2": "^3.14.1",
+    "wx-server-sdk": "~3.0.1"
+  }
+}

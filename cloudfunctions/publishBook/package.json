@@ -1,0 +1,10 @@
+{
+  "name": "publishbook",
+  "version": "1.0.0",
+  "description": "Publish or edit a book listing",
+  "main": "index.js",
+  "dependencies": {
+    "mysql2": "^3.14.1",
+    "wx-server-sdk": "~3.0.1"
+  }
+}

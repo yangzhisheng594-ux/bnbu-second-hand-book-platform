@@ -1,130 +1,46 @@
-/* pages/profile/profile.wxss */
-page {
-  background-color: #f4f4f4;
-  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
-}
-.container {
-  padding-bottom: 40rpx;
-}
-
-.profile-header {
-  display: flex;
-  align-items: center;
-  padding: 40rpx 30rpx;
-  background-color: #fff; /* 或主题色背景 */
-  /* background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%); */
-  /* color: white; */
-  margin-bottom: 20rpx;
-}
-.avatar {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 50%;
-  margin-right: 30rpx;
-  border: 2rpx solid #eee;
-  background-color: #f0f0f0; /* 占位背景 */
-}
-.user-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.username {
-  font-size: 36rpx;
-  font-weight: bold;
-  margin-bottom: 10rpx;
-  /* color: white; */ /* 如果背景是深色 */
-}
-.edit-profile-btn {
-  background-color: rgba(255,255,255,0.2);
-  /* color: white; */
-  color: #666;
-  border: 1rpx solid #ddd; /* 如果背景是白色 */
-  border-radius: 30rpx;
-  padding: 0 25rpx;
-  font-size: 24rpx;
-  line-height: 50rpx; height: 50rpx;
-  margin: 0;
-}
-.edit-profile-btn::after { border: none; }
-
-.section-card { /* 通用卡片样式 */
-  background-color: #fff;
-  margin: 0 20rpx 20rpx 20rpx;
-  border-radius: 16rpx;
-  padding: 20rpx 30rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.03);
-}
-
-.order-section .section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 20rpx;
-  margin-bottom: 20rpx;
-  border-bottom: 1rpx solid #f0f0f0;
-}
-.section-title {
-  font-size: 32rpx;
-  font-weight: bold;
-  color: #333;
-}
-.view-all-orders {
-  display: flex;
-  align-items: center;
-  font-size: 26rpx;
-  color: #999;
-}
-.arrow-right {
-  width: 24rpx;
-  height: 24rpx;
-  margin-left: 10rpx;
-  opacity: 0.7;
-}
-
-.order-status-tabs {
-  display: flex;
-  justify-content: space-around;
-  padding: 10rpx 0;
-}
-.tab-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 24rpx;
-  color: #555;
-  position: relative; /* 为了角标定位 */
-  width: 20%; /* 平均分配 */
-}
-.tab-icon {
-  width: 64rpx; /* 图标尺寸 */
-  height: 64rpx;
-  margin-bottom: 10rpx;
-}
-.badge {
-  position: absolute;
-  top: -10rpx;
-  right: 0rpx; /* 根据图标大小调整 */
-  background-color: #ff5000;
-  color: white;
-  font-size: 20rpx;
-  border-radius: 50%;
-  padding: 2rpx 10rpx;
-  min-width: 30rpx; /* 最小宽度，使单个数字也好看 */
-  height: 30rpx;
-  line-height: 30rpx;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.login-button, .logout-button {
-  margin: 40rpx 30rpx;
-  border-radius: 10rpx;
-}
-.login-button[type="primary"] {
-  background-color: #1AAD19;
-}
-.logout-button {
-  background-color: #f0f0f0;
-  color: #555;
-}
+page { background: #f6f5f2; }
+.container { min-height: 100vh; padding: 0 24rpx 32rpx; box-sizing: border-box; }
+.page-nav { position: relative; display: flex; align-items: center; justify-content: center; height: calc(104rpx + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top); box-sizing: border-box; }
+.page-nav-title { color: #2f6b57; font-size: 31rpx; font-weight: 750; text-align: center; }
+.profile-header { display: flex; align-items: center; padding: 27rpx 24rpx; border-radius: 25rpx; background: linear-gradient(135deg, #2f6b57, #4a876c); box-shadow: 0 14rpx 26rpx rgba(47, 107, 87,.15); }
+.avatar { width: 90rpx; height: 90rpx; margin-right: 18rpx; border: 4rpx solid rgba(255,255,255,.9); border-radius: 50%; background: #fff; box-shadow: 0 5rpx 12rpx rgba(0,0,0,.16); }
+.profile-copy { display: flex; flex: 1; flex-direction: column; min-width: 0; }
+.username { overflow: hidden; color: #fff; font-size: 34rpx; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+.member-note { margin-top: 9rpx; color: #d2dfd5; font-size: 21rpx; letter-spacing: .5rpx; }
+.profile-action { display: flex; align-items: center; justify-content: center; height: 56rpx; min-width: 130rpx; margin-left: 12rpx; padding: 0 12rpx; border: 1rpx solid rgba(255,255,255,.28); border-radius: 16rpx; background: rgba(255,255,255,.10); color: #fff; font-size: 22rpx; font-weight: 600; line-height: 56rpx; box-sizing: border-box; }
+.action-arrow { margin-left: 5rpx; font-size: 29rpx; font-weight: 400; }
+.order-section { margin-top: 22rpx; padding: 0 21rpx 22rpx; border: 1rpx solid #ebe8e2; border-radius: 24rpx; background: #fff; box-shadow: 0 8rpx 22rpx rgba(47, 107, 87,.035); }
+.section-header { display: flex; align-items: center; justify-content: space-between; height: 91rpx; border-bottom: 1rpx solid #f0eeea; }
+.section-title { color: #2f6b57; font-size: 31rpx; font-weight: 750; }
+.view-all-orders { display: flex; align-items: center; color: #8d98a8; font-size: 23rpx; }
+.view-all-orders::after { margin-left: 7rpx; color: #b1b8c2; content: '›'; font-size: 30rpx; line-height: 1; }
+.order-status-tabs { display: flex; padding-top: 22rpx; }
+.tab-item { width: 25%; }
+.tab-container { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 138rpx; margin: 0 4rpx; border-radius: 17rpx; }
+.tab-container.payment { background: #fff6ef; color: #dc704b; }
+.tab-container.shipment { background: #f2f7f3; color: #567aa4; }
+.tab-container.receipt { background: #eef8f7; color: #338477; }
+.tab-container.service { background: #f7f3fb; color: #8264a6; }
+.status-icon { width: 60rpx; height: 60rpx; margin-bottom: 7rpx; }
+.tab-label { color: #526074; font-size: 25rpx; font-weight: 700; line-height: 1; text-align: center; }
+.tab-count { position: absolute; top: -9rpx; right: 1rpx; min-width: 31rpx; height: 31rpx; padding: 0 5rpx; border: 3rpx solid #fff; border-radius: 18rpx; background: #ed633c; color: #fff; font-size: 19rpx; line-height: 31rpx; text-align: center; }
+.logout-section { width: 100%; margin-top: 20rpx; }
+.logout-button { display: flex !important; align-items: center; justify-content: center; width: 100% !important; height: 84rpx; margin: 0 !important; border: 1rpx solid #f3cabc; border-radius: 17rpx; background: #fff7f3 !important; color: #df633e; font-size: 28rpx; font-weight: 700; line-height: 84rpx; box-sizing: border-box; }
+.logout-button::after { border: 0; }
+.recommend-section { margin-top: 20rpx; padding: 21rpx 20rpx 24rpx; border: 1rpx solid #e5ebe3; border-radius: 24rpx; background: linear-gradient(135deg, #fbfdf9, #f4f9f3); box-shadow: 0 8rpx 20rpx rgba(47, 107, 87,.035); }
+.recommend-heading, .recommend-title-group { display: flex; align-items: center; }
+.recommend-heading { justify-content: space-between; }
+.recommend-title-group { min-width: 0; }
+.recommend-sprig { position: relative; width: 35rpx; height: 25rpx; margin-left: 10rpx; }
+.recommend-leaf { position: absolute; width: 13rpx; height: 8rpx; border-radius: 100% 0 100% 0; background: #a5c878; transform: rotate(-28deg); }
+.recommend-leaf.leaf-one { top: 4rpx; left: 1rpx; }
+.recommend-leaf.leaf-two { top: 11rpx; left: 15rpx; background: #e8c270; transform: rotate(36deg); }
+.recommend-badge { padding: 6rpx 10rpx; border-radius: 14rpx; background: #fff; color: #789786; font-size: 19rpx; }
+.recommend-subtitle { display: block; margin-top: 7rpx; color: #8b9f91; font-size: 20rpx; }
+.recommend-list { display: flex; margin-top: 17rpx; }
+.recommend-card { display: flex; flex: 1; flex-direction: column; min-width: 0; min-height: 390rpx; padding: 11rpx; border-radius: 15rpx; background: rgba(255,255,255,.82); box-sizing: border-box; }
+.recommend-card + .recommend-card { margin-left: 12rpx; }
+.recommend-cover { width: 100%; height: 220rpx; border-radius: 10rpx; background: #eef4ee; }
+.recommend-book-title { display: -webkit-box; overflow: hidden; min-height: 50rpx; margin-top: 9rpx; color: #355c49; font-size: 21rpx; font-weight: 700; line-height: 1.22; text-overflow: ellipsis; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.recommend-meta { overflow: hidden; margin-top: 4rpx; color: #91a397; font-size: 18rpx; text-overflow: ellipsis; white-space: nowrap; }
+.recommend-price { margin-top: 6rpx; color: #ed633c; font-size: 24rpx; font-weight: 750; }

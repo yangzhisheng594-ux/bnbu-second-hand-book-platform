@@ -1,4 +1,4 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "我的求购"
+  "navigationStyle": "custom"
 }

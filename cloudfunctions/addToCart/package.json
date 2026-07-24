@@ -1,0 +1,8 @@
+{
+  "name": "addtocart",
+  "version": "1.0.0",
+  "dependencies": {
+    "mysql2": "^3.14.1",
+    "wx-server-sdk": "~3.0.1"
+  }
+}

@@ -1,52 +1,83 @@
 // pages/orderList/orderList.js
 Page({
   data: {
-    currentStatus: 'all', // 当前显示的订单状态
+    currentStatus: 'all',
     orders: [],
-    // 模拟订单数据
-    allMockOrders: [
-      { orderId: '2024001', status: 'pendingPayment', statusText: '待付款', statusClass: 'pendingPayment', totalQuantity: 1, totalAmount: 68.00, products: [{ productId: '1', title: '深入浅出Node.js', coverUrl: '/images/placeholder_cover.png', quantity: 1, price: 68.00 }] },
-      { orderId: '2024002', status: 'pendingReceipt', statusText: '待收货', statusClass: 'pendingReceipt', totalQuantity: 2, totalAmount: 158.50, products: [{ productId: '3', title: '小程序开发实战', coverUrl: '/images/placeholder_cover.png', quantity: 1, price: 59.50 }, { productId: '2', title: 'JavaScript高级程序设计', coverUrl: '/images/placeholder_cover_rect.png', quantity: 1, price: 99.00 }] },
-      { orderId: '2024003', status: 'completed', statusText: '已完成', statusClass: 'completed', totalQuantity: 1, totalAmount: 75.00, products: [{ productId: '101', title: 'Python从入门到实践', coverUrl: '/images/placeholder_cover_rect.png', quantity: 1, price: 75.00 }] },
-    ]
+    page: 1,
+    pageSize: 20,
+    hasMore: false,
+    isLoading: false,
+    loadFailed: false
   },
+
   onLoad: function (options) {
     const status = options.status || 'all';
     this.setData({ currentStatus: status });
     wx.setNavigationBarTitle({ title: this.getNavTitleByStatus(status) });
-    this.loadOrders(status);
+    this.loadOrders(true);
   },
-  getNavTitleByStatus(status) {
-      switch(status) {
-          case 'pendingPayment': return '待付款订单';
-          case 'pendingShipment': return '待发货订单';
-          case 'pendingReceipt': return '待收货订单';
-          case 'afterSales': return '退款/售后';
-          default: return '我的订单';
+
+  getNavTitleByStatus: function(status) {
+    switch(status) {
+      case 'pendingPayment': return '待付款订单';
+        case 'pendingShipment': return '待面交订单';
+        case 'pendingReceipt': return '待确认收书';
+      case 'afterSales': return '退款/售后';
+      default: return '我的订单';
+    }
+  },
+
+  async loadOrders(reset = false) {
+    if (this.data.isLoading || (!reset && !this.data.hasMore)) return;
+    const page = reset ? 1 : this.data.page + 1;
+    this.setData({ isLoading: true, loadFailed: false });
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'getOrders',
+        data: { status: this.data.currentStatus, page, pageSize: this.data.pageSize }
+      });
+      if (!res.result || !res.result.success) throw new Error((res.result && res.result.message) || '加载订单失败');
+      this.setData({
+        orders: reset ? (res.result.data || []) : this.data.orders.concat(res.result.data || []),
+        page,
+        hasMore: Boolean(res.result.pagination && res.result.pagination.hasMore)
+      });
+    } catch (error) {
+      console.error('[OrderList] loadOrders failed:', error);
+      this.setData({ orders: [], loadFailed: true });
+      wx.showToast({ title: error.message || '加载订单失败', icon: 'none' });
+    } finally {
+      this.setData({ isLoading: false });
+      wx.stopPullDownRefresh();
+    }
+  },
+
+  confirmReceipt(e) {
+    const orderId = e.currentTarget.dataset.id;
+    wx.showModal({
+      title: '确认收货',
+      content: '确认已完成校内面交，并验收书籍无误吗？',
+      success: async result => {
+        if (!result.confirm) return;
+        wx.showLoading({ title: '处理中...' });
+        try {
+          const res = await wx.cloud.callFunction({ name: 'confirmReceipt', data: { orderId } });
+          if (!res.result || !res.result.success) throw new Error((res.result && res.result.message) || '操作失败');
+          wx.showToast({ title: '确认收书成功', icon: 'success' });
+          this.loadOrders(true);
+        } catch (error) {
+          wx.showToast({ title: error.message || '操作失败', icon: 'none' });
+        } finally {
+          wx.hideLoading();
+        }
       }
+    });
   },
-  loadOrders: function(status) {
-    wx.showLoading({ title: '加载中...' });
-    // 模拟API请求
-    // wx.request({ url: `YOUR_API/orders?status=${status}`, ... })
-    setTimeout(() => { // 模拟异步
-      let filteredOrders = [];
-      if (status === 'all') {
-        filteredOrders = this.data.allMockOrders;
-      } else {
-        filteredOrders = this.data.allMockOrders.filter(order => order.status === status);
-      }
-      this.setData({ orders: filteredOrders });
-      wx.hideLoading();
-    }, 500);
-  },
-  // 如果有顶部tab切换功能
-  // switchTab: function(e) {
-  //   const status = e.currentTarget.dataset.status;
-  //   if (status !== this.data.currentStatus) {
-  //     this.setData({ currentStatus: status, orders: [] }); // 清空列表以便显示加载
-  //     wx.setNavigationBarTitle({ title: this.getNavTitleByStatus(status) });
-  //     this.loadOrders(status);
-  //   }
-  // }
-})
+
+  goToHome() { wx.switchTab({ url: '/pages/index/index' }); },
+  goBack() { wx.navigateBack(); },
+  retryLoad() { this.loadOrders(true); },
+  loadMore() { this.loadOrders(false); },
+  onReachBottom() { this.loadOrders(false); },
+  onPullDownRefresh() { this.loadOrders(true); }
+});

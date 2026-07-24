@@ -1,4 +1,4 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "填写订单"
+  "navigationStyle": "custom"
 }
