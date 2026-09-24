@@ -102,3 +102,27 @@ To connect a persistent backend:
 - Handoff time and location scheduling with subscription reminders.
 - Favourites, reporting, moderation, and textbook-edition matching.
 - A carefully designed payment and dispute workflow for a real deployment.
+- 
+## H5 web version (community contribution)
+
+An independent **H5 + Node** version lives in [`h5-web/`](h5-web/), brought to a different
+campus (HZAU / 华中农业大学) and localized there.
+
+What changed relative to this repository:
+
+- **Course-aware discovery → major + grade.** Textbook choice on that campus is driven by the
+  study plan and the term, so the home page recommends by `major + grade` and surfaces buy
+  requests from the same major (a 53-major × 6-grade catalogue).
+- **Demo checkout → lock-then-meet.** "Confirm purchase" locks the book without charging so two
+  buyers cannot race; the handoff happens in person on campus. No payment is taken.
+- **Contact visibility** becomes a three-level user setting, withheld server-side.
+- **Student verification** (enterprise-WeChat screenshot, admin reviewed) gates publishing and
+  buying — this already covers the first item under *Future directions* above.
+- **Account system** (email + password, email codes, login throttling, account deletion) plus an
+  **admin console**, because the H5 build cannot rely on a WeChat identity.
+
+The frontend keeps this repository's `<view>/<text>` markup and `rpx` sizing so pages stay
+portable in both directions; the 24 cloud functions map onto 83 REST endpoints in a
+self-hosted Node backend. Only the existing `images/` are reused — no binaries are added.
+
+See [`h5-web/README.md`](h5-web/README.md) for the full write-up.
